@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="format-detection" content="telephone=no,email=no">
+  <title>签到</title>
+  <%= require(`../../common/_meta.html`) %>
+</head>
+
+<body>
+  <nav class="nav">
+    <a href="#" class="btn-nav">
+          <i data-icon='user'></i>
+          会员中心
+        </a>
+    <a href="#" class="btn-nav">
+          <i data-icon='center'></i>
+          会员中心
+        </a>
+  </nav>
+  <div class="page">
+    <h1 class="title ">每日签到</h1>
+    <section class="container main">
+      <div class="top text-center">
+        <span class="pull-right">本月累计签到 <span class='day'>6</span> 天</span>
+        <span class="pull-left">现有积分 <span class='integral'>999999</span></span>
+        <h3 class='f-orange date'>2017年5月</h3>
+      </div>
+      <table cellpadding="0" cellspacing="0" class="table">
+        <thead class="table-t">
+          <tr>
+            <td>日</td>
+            <td>一</td>
+            <td>二</td>
+            <td>三</td>
+            <td>四</td>
+            <td>五</td>
+            <td>六</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+            <td>4</td>
+            <td>5</td>
+            <td>6</td>
+            <td>7</td>
+          </tr>
+        </tbody>
+      </table>
+      <ul class='goods'>
+        <li>
+          <i data-icon='cart'></i>
+        </li>
+        <li>
+          <i data-icon='box'></i>
+          <span>5天</span>
+        </li>
+      </ul>
+      <div class='bottom text-center'>
+        <a class="btn">
+            签&emsp;到
+        </a>
+        <a href="rotate.html" class="btn">
+           抽&emsp;奖
+        </a>
+      </div>
+    </section>
+    <section class="container">
+      <h3>签到规则：</h3>
+      <ol>
+        <li>每人每日签到获取积分奖励，10积分/次</li>
+        <li>每月完成连续签到任务，即可获得相应奖励</li>
+        <li>
+          3.如签到断档则只影响签到次数，对整体无碍
+        </li>
+        <li>
+          4.每月一号签到任务清零，当月奖励请及时兑换
+        </li>
+        <li>
+          5.连续签到任务完成三日内兑换奖励，请在有效 期内及时使用
+        </li>
+      </ol>
+    </section>
+  </div>
+</body>
+
+</html>

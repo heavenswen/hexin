@@ -1,0 +1,42 @@
+@import "~./_common.scss"; 
+
+.top{
+    padding: size(20,rem);
+    > span{
+        padding-top: size(3,rem);
+        font-size:size(12*2,rem); 
+    }
+    .date{
+        font-size:size(14*2,rem); 
+    }
+}
+$table_r:8px;
+.table{
+    width: 100%;
+    font-size:size(14*2,rem); 
+    text-align: center;
+    tbody td{
+        border-style:solid;
+        border-color:#ccc; 
+        border-bottom-width: 1px;
+        border-right-width:1px; 
+        border-top-width:1px;
+        border-left-width:1px; 
+    }
+
+    .table-t{
+        background: $orange;
+        color: #fff;
+
+        
+        tr>td:nth-of-type(1){
+             border-radius: $table_r 0 0 0;
+
+        }
+         tr>td:nth-last-of-type(1){
+             border-radius: 0 $table_r 0 0;
+
+        }
+
+    }
+}

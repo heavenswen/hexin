@@ -1,0 +1,127 @@
+//Q基础库
+//@import "*";
+//常量
+$sm: 768; //小屏幕比例
+$md: 992; //中屛
+$lg: 1200; //屏幕
+$mobile:true;//是否应用于手机端
+
+//font style
+$f-style:'Microsoft YaHei',Arial, Helvetica, sans-serif;
+$f:16px;//font default
+$f-sm:12px; //font small
+$rem:100;
+
+//size math rem
+@function size($p,$u:px,$r:$rem) {
+    @if $u == px{
+        //普通
+        @return $p+$u; 
+    }@else if $u == rem{
+        @return ($p/$r)+$u;
+    }
+}
+
+//color
+$blue:#39f;
+$red:#f00;
+$orange:#ff7800;
+$green:green;
+
+//标签  数组是从1开始的 引用nth($hs,1)
+$hs: h1,h2,h3,h4,h5,h6; 
+$all:body,h1,h2,h3,h4,h5,h6,label,ul,li,dl,dt,dd,p,span,strong,input,select,textarea;
+
+
+
+//定位
+// 利用absolute 上下居中 @include pos-mid()
+@mixin pos-mid($position:absolute){
+    position: $position;
+    top: 50%;
+    margin: auto;
+    @include transform(translateY(-50%));
+}
+//absolute and margin 上下左右居中 @include  pos-auto($w,$h) 必须有宽高
+@mixin pos-auto($w,$h,$position:absolute) {
+    position: $position;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: $w;
+    height: $h;
+    margin: auto;
+}
+//给对象添加固定padding-data()
+@mixin padding-data($types:(top, left, bottom, right, ), $num:10px) {
+    @each $type in $types {
+        padding-#{$type}: $num;
+    }
+}
+//边框
+@mixin margin-data($types:(top, left, bottom, right, ), $num:10px) {
+    @each $type in $types {
+        margin-#{$type}: $num;
+    }
+}
+//外观
+//三角形 （方向，宽，高,颜色）
+@mixin triangle($t, $w, $h, $c) {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: $h $w;
+    border-color: transparent;
+    border-#{$t}-color: $c;
+}
+//圆角边框
+@mixin box-radius($r:50%) {
+    border-radius: $r;
+    overflow: hidden;
+}
+
+//变形
+
+//快速过渡
+@mixin transition($type:all, $s:0.3, $ease:linear) {
+    transition: $type $s+s $ease;
+}
+//扭曲兼容
+@mixin transform($type...) {
+    transform: $type;
+}
+
+//媒体
+//@content 可以用来解决css3的@media等带来的问题。它可以使@mixin接受一整块样式
+//@include max-media(480px) {
+//body { color: red }
+//}
+
+//最大尺寸（npx）
+@mixin max-media($w) {
+    @media( max-width: $w ) {
+        @content;
+    }
+}
+//最小尺寸小（npx）
+@mixin min-media($w) {
+    @media( min-width: $w ) {
+        @content;
+    }
+}
+
+//循环
+//@each $child in $array{ //child... }
+//@for $i from 1 to 10{ //$i到9}
+
+//嵌套 @at-root
+//@at-root (without: media)，@at-root (without: support)。这个语法的关键词有四个：all（表示所有），rule（表示常规css），media（表示media），support（表示support，因为@support目前还无法广泛使用，所以在此不表）。我们默认的@at-root其实就是@at-root (without:rule)。
+//继承 @extend h1; 继承选择器的样式
+
+//function @function pxToRem($px) {@return $px / $baseFontSize * 1rem;}
+//引用 body{font-size:pxToRem(16px);}
+
+//if @if $type == ocean {color: blue;} 
+//@else if $type == matador {color: red;}
+// @else {  color: black;}

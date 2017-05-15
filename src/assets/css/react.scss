@@ -1,0 +1,199 @@
+@import "~./_common.scss";  
+
+
+/*
+ pc.css
+ * */
+
+#{$all} {
+	margin: 0;
+	padding: 0;
+}
+
+* {
+	outline: 0 !important;
+}
+
+#{$hs}{
+	font-weight:normal; 
+}
+button,
+input[type=radio],
+input[type=checkbox],
+a {
+	cursor: pointer;
+}
+
+a {
+	text-decoration: none;
+	background: transparent;
+	color: inherit;
+	font-size: inherit
+}
+
+a img {
+	border: 0 none;
+}
+
+ul {
+	list-style: none;
+}
+
+
+html {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+
+audio,
+canvas,
+progress,
+video,
+.row {
+	display: inline-block;
+	vertical-align: baseline;
+}
+
+*,
+*:after,
+*:before {
+	box-sizing: inherit;
+	-moz-box-sizing: inherit;
+	-webkit-box-sizing: inherit;
+}
+
+.row {
+	clear: both;
+	width: 100%;
+}
+
+*:after {
+	content: '';
+	clear: both;
+	height: 0;
+}
+
+
+/*font*/
+
+.small {
+	font-size: $f-sm;
+}
+
+.normal {
+	font-weight: normal;
+}
+
+.bold {
+	font-weight: 700;
+}
+
+.f-blue {
+	color: $blue;
+}
+
+.f-red {
+	color:$red;
+}
+
+.f-orange {
+	color:$orange;
+}
+.f-green{
+	color: $green
+}
+
+/*container*/
+
+.text-left {
+	text-align: left;
+}
+
+.text-right {
+	text-align: right;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.pull-right {
+	float: right;
+}
+
+.pull-left {
+	float: left;
+}
+.block{
+	display: block!important;
+}
+.none{
+	display: none!important;
+}
+
+@if $mobile == true {
+	.container{
+		margin-left:15px;
+		margin-right:15px; 
+	}
+    
+} 
+/*page*/
+body{
+	font-family: $f-style;
+	font-size: size(28,rem);
+}
+
+.title{
+	background: $orange;
+	text-align: center;
+	font-size: size(32,rem);
+	padding: size(20,rem)	 
+}
+.nav{
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	font-size:0;
+	border-top:1px solid #ccc; 
+	a{
+		display: inline-block;
+		width: 50%;
+		height: 49px;
+		line-height: 49px;
+		font-size: size(16,px);
+		text-align: center;
+		transition:all .3s linear; 
+		&:nth-of-type(1){
+			border-right: 1px solid #ccc;
+		}
+		i{
+			vertical-align:top;
+			margin-top: 18px;
+			width:size(46/2,px);
+			height: size(36/2,px);
+		}
+		&:active{
+			background: #ccc;
+		}
+	}
+}
+.nav~.page{
+	padding-bottom: 49px;
+}
+i[data-icon]{
+	display: inline-block;
+	width:size(46,rem);
+	height: size(36,rem);
+	background-size:100%;
+	background-repeat:no-repeat;  
+	
+}
+[data-icon='user']{
+	background-image:url(../images/user.png); 
+}
+[data-icon='center']{
+	background-image:url(../images/center.png); 
+}
