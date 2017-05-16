@@ -1,5 +1,69 @@
 @import "~./_common.scss"; 
 
+
+[data-icon='cart']{
+    background-image:url(../images/cart.png); 
+}
+[data-icon='box']{
+    background-image:url(../images/box.png); 
+}
+[data-icon='box-open']{
+    background-image:url(../images/box-open.png); 
+}
+[data-icon='box-active']{
+    background-image:url(../images/box-active.png); 
+}
+
+.animated {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+
+.animated.infinite {
+  animation-iteration-count: infinite;
+}
+
+.animated.hinge {
+  animation-duration: 2s;
+}
+
+.animated.flipOutX,
+.animated.flipOutY,
+.animated.bounceIn,
+.animated.bounceOut {
+  animation-duration: .75s;
+}
+
+@keyframes tada {
+  from {
+    transform: scale3d(1, 1, 1);
+  }
+
+  10%, 20% {
+    transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -5deg);
+  }
+
+  30%, 50%, 70%, 90% {
+    transform: scale3d(1.3, 1.3, 1.3) rotate3d(0, 0, 1, 5deg);
+  }
+
+  40%, 60%, 80% {
+    transform: scale3d(1.3, 1.3, 1.3) rotate3d(0, 0, 1, -5deg);
+  }
+
+  to {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.tada {
+  animation-name: tada;
+}
+
+
+
+$table_r:5px;//table 圆角
+
 .top{
     padding: size(20,rem);
     > span{
@@ -10,20 +74,34 @@
         font-size:size(14*2,rem); 
     }
 }
-$table_r:8px;
 .table{
     width: 100%;
     font-size:size(14*2,rem); 
     text-align: center;
+    td{
+        padding-top:size(10,rem);
+        padding-bottom: size(10,rem); 
+    }
     tbody td{
         border-style:solid;
         border-color:#ccc; 
         border-bottom-width: 1px;
-        border-right-width:1px; 
-        border-top-width:1px;
+        border-right-width:0px; 
+        border-top-width:0px;
         border-left-width:1px; 
+        &:nth-last-of-type(1){
+            border-right-width: 1px;
+            //border-top-width: 
+        }
     }
-
+    tbody tr:nth-last-of-type(1){
+        td:nth-of-type(1){
+            border-radius:0 0 0 $table_r;
+        }
+        td:nth-last-of-type(1){
+            border-radius:0 0  $table_r 0;
+        }
+    }
     .table-t{
         background: $orange;
         color: #fff;
@@ -39,4 +117,90 @@ $table_r:8px;
         }
 
     }
+}
+.goods{
+    position: relative;
+    margin-top: size(30,rem);
+    >.sp, &::before{
+        position: absolute;
+        left: 0;
+        top:size(20,rem) ;
+        content: '';
+        height: 1px;
+        
+    }
+    >.sp{
+        background-color: $orange;
+    }
+     &::before{
+        width:100%;
+        background-color: #ccc;
+     }
+    li{
+        position: relative;
+        display: inline-block;
+        border: 1px;
+        vertical-align: top;
+        text-align: left;
+        width: 10%;
+        height: size(88,rem);
+        z-index: 1;
+        background-color: #fff;
+        margin-right:10%; 
+        span,i{
+            text-align: center;
+            display:block;
+            margin: auto;
+        }
+        span{
+            text-indent: size(5,rem)
+        }
+        &:not(:nth-of-type(1))[data-sp='active']{
+            
+            i{
+                @extend .animated;
+                @extend .tada;
+                animation-iteration-count: infinite;
+                background-image:url(../images/box-active.png); 
+            }
+        }
+         &:not(:nth-of-type(1))[data-sp='open']{
+           i{
+              background-image:url(../images/box-open.png); 
+            }
+         }
+         &[data-sp='active'],&[data-sp='open']{
+              &::after{
+                  background-color:$orange; 
+              }
+         }
+        i{
+            margin-bottom: size(15,rem);
+      
+        }
+    }
+}
+.bottom{
+    text-align: center;
+    margin-top:size(25,rem);
+    .btn{
+        display: inline-block;
+        width: size(259,rem);
+        height: size(80,rem);
+        line-height: size(80,rem);
+        font-size:size(36,rem); 
+        color:$orange;
+        border:1px solid $orange; 
+        border-radius:5px; 
+        transition: all .3s linear;
+        &:active{
+            background-color:#ccc; 
+        }
+        &:nth-of-type(1){
+            margin-right:size(35,rem); 
+        }
+    }
+}
+.text{
+    margin-top:size(50,rem); 
 }
