@@ -81,6 +81,9 @@ $table_r:5px;//table 圆角
     td{
         padding-top:size(10,rem);
         padding-bottom: size(10,rem); 
+        >a{
+            display: block;
+        }
     }
     tbody td{
         border-style:solid;
@@ -136,17 +139,18 @@ $table_r:5px;//table 圆角
         width:100%;
         background-color: #ccc;
      }
-    li{
+   > li{
         position: relative;
         display: inline-block;
         border: 1px;
         vertical-align: top;
         text-align: left;
-        width: 10%;
+        width: 8.33%;
         height: size(88,rem);
         z-index: 1;
         background-color: #fff;
-        margin-right:10%; 
+        margin-right:8.33%; 
+        font-size:size(12,rem); 
         span,i{
             text-align: center;
             display:block;

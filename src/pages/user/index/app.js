@@ -6,7 +6,16 @@ import dateTable from "assets/js/dateTable.js"
 (function () {
   //rem init
   new rem();
-  dateTable({ obj: '.table tbody' });
+  dateTable({
+    obj: '.table tbody', fun(n) {
+      return `<a data-date='${n}'>${n}</a>`
+    }
+  });
 
+  //签到
+  document.querySelector("#sign").addEventListener("click", function () {
+
+
+  })
 
 })()

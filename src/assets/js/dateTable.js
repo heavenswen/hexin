@@ -1,11 +1,13 @@
 const now = new Date()//当前时间
 class DateTable {
-    constructor({ obj, date }) {
+    constructor({ obj, date, fun }) {
         this.obj = document.querySelector(obj) //对象
         this.now = date ? date : now//时间
         this.year = this.now.getFullYear()//年
         this.mouth = this.now.getMonth()//当月
         this.firstDay = new Date(this.year, this.mouth, 1) //第一天 星期
+        this.fun = fun
+
     }
     mouthLength(d) {
         // date
@@ -28,7 +30,7 @@ class DateTable {
             return 30;
         }
     }
-    initTable() {
+    initTable(arr, fun) {
         let htm = '' //
         let d = this.firstDay
         let day = d.getDay()//星期几
@@ -38,7 +40,6 @@ class DateTable {
         let addM = num % 7 ? 1 : 0;
         let m = parseInt(num / 7) + addM //几周
         let n = 0//从1开始
-        console.log(day)
         for (let i = 1; i < m; i++) {
             let tr = ''
             //td 输出
@@ -49,7 +50,19 @@ class DateTable {
                 if (n < day || n > monthD) {
                     con = '&nbsp;'
                 } else {
-                    con = n
+                    if (arr && arr.indexOf(n)) {
+                        if (fun) {
+                            con = fun(n);
+                        }
+                    } else {
+                        //添加
+                        if (this.fun) {
+                            //再处理
+                            con = this.fun(n);
+                        } else {
+                            con = n;
+                        }
+                    }
                 }
                 n++;
 
@@ -67,8 +80,8 @@ class DateTable {
 
 
 //
-function init({ obj, date }) {
-    return new DateTable({ obj, date }).initTable()
+function init({ obj, date, fun }) {
+    return new DateTable({ obj, date, fun }).initTable()
 }
 
 module.exports = init
