@@ -25,7 +25,7 @@
     <section class="container main">
       <div class="top text-center">
         <span class="pull-right">本月累计签到 <span class='day'>6</span> 天</span>
-        <span class="pull-left">现有积分 <span class='integral'>999999</span></span>
+        <span class="pull-left">现有积分 <span class='integral'>0</span></span>
         <h3 class='f-orange date'>2017年5月</h3>
       </div>
       <table cellpadding="0" cellspacing="0" class="table">
@@ -58,31 +58,41 @@
           <i data-icon='cart'></i>
         </li>
         <li data-day='5'>
-          <i data-icon='box'></i>
-          <span>5天</span>
+          <a>
+            <i data-icon='box'></i>
+            <span>5天</span>
+          </a>
         </li>
-        <li data-day='10' >
+        <li data-day='10'>
+          <a>
           <i data-icon='box'></i>
           <span>10天</span>
+           </a>
         </li>
         <li data-day='15'>
+          <a>
           <i data-icon='box'></i>
           <span>15天</span>
+           </a>
         </li>
         <li data-day='20'>
+          <a>
           <i data-icon='box'></i>
           <span>20天</span>
+           </a>
         </li>
         <li data-day='25'>
+          <a>
           <i data-icon='box'></i>
           <span>25天</span>
+           </a>
         </li>
       </ul>
       <div class='bottom text-center'>
         <a class="btn " id='sign'>
             签&emsp;到
         </a>
-        <a href="rotate.html" class="btn">
+        <a href="<%= htmlWebpackPlugin.options.userEnv?'index.php?m=Home&c=Index&a=lottery':'lottery.html' %>" class="btn">
            抽&emsp;奖
         </a>
       </div>

@@ -7,7 +7,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
-const release = process.env.NODE_ENV === 'production' ? '/cxtdemo/' : '/'//域名文件夹
+const release = process.env.NODE_ENV === 'production' ? '/Public/home/activity/' : '/'//域名文件夹
 const myHost = "192.168.4.30"
 //页面对应路口
 const entries = {}
@@ -176,6 +176,7 @@ glob.sync("./src/pages/**/*.{ejs,html}").forEach(path => {
     inject: 'body',
     favicon: './src/assets/img/logo.png',
     hash: process.env.NODE_ENV === 'production',
+    userEnv:process.env.NODE_ENV === 'production',
     chunks: ['vendors', chunk] //chunk
   }
   config.plugins.push(new HtmlWebpackPlugin(htmlConf))
@@ -192,11 +193,11 @@ if (process.env.NODE_ENV === 'production') {
         NODE_ENV: '"production"'
       }
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
-    })
+    // new webpack.optimize.UglifyJsPlugin({
+    //   compress: {
+    //     warnings: false
+    //   }
+    // })
   ]),
     //压缩单独的css
     new OptimizeCssAssetsPlugin({

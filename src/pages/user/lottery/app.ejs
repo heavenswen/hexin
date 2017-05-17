@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="format-detection" content="telephone=no,email=no">
+  <title>每日抽奖</title>
+  <%= require(`../../common/_meta.html`) %>
+    <!--嵌入页面-->
+</head>
+
+<body>
+  <nav class="nav">
+    <a href="#" class="btn-nav">
+          <i data-icon='user'></i>
+          会员中心
+        </a>
+    <a href="#" class="btn-nav">
+          <i data-icon='center'></i>
+          会员中心
+        </a>
+  </nav>
+  <section class="page">
+    <h1 class="title ">每日抽奖</h1>
+    <div class="container">
+      <div class="canvas-box">
+        <a id="btn"><span>免费抽奖</span></a>
+      </div>
+      <ul class='luck-data'>
+        <li class='f-orange'><a class="pull-right" id="goods-list"> 中奖记录</a>免费抽奖：剩余 <span class='free'>1</span> 次</li>
+        <li class='f-orange'>积分抽奖：剩余 <span class='luck'>3</span> 次</li>
+      </ul>
+      <h5 class="tit">
+        <a class="f-orange pull-right">当前积分：<span class='total'>0</span></a> 抽奖规则:
+      </h5>
+      <ol class="list">
+        <li>每人每日签到后将会有一次免费抽奖机会。</li>
+        <li>每人每日有三次积分抽奖机会，每次抽奖将会 消耗50积分
+        </li>
+      </ol>
+    </div>
+  </section>
+  <section class="mask goods-list">
+    <div class="con">
+      <h3 class="tit text-center">
+        中奖记录
+      </h3>
+      <section class='gl-box'>
+        <table>
+          <thead>
+            <tr>
+              <td>时间</td>
+              <td>消耗</td>
+              <td>奖励</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2014.01.01</td>
+              <td>积分</td>
+              <td>一等奖</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </div>
+  </section>
+</body>
+
+</html>

@@ -1,19 +1,22 @@
+//日历类
+
 const now = new Date()//当前时间
 class DateTable {
-    constructor({ obj, date, fun }) {
+    constructor({ obj, date }) {
         this.obj = document.querySelector(obj) //对象
         this.now = date ? date : now//时间
         this.year = this.now.getFullYear()//年
         this.mouth = this.now.getMonth()//当月
         this.firstDay = new Date(this.year, this.mouth, 1) //第一天 星期
-        this.fun = fun
 
     }
     mouthLength(d) {
         // date
         //计算出天数
-        let year = d.getYear()
-        let n = d.getMonth()
+        let day = d?d:this.firstDay
+
+        let year = day.getYear()
+        let n = day.getMonth()
         let big = [1, 3, 5, 7, 8, 10, 12]
         if (n == 2) {
             //是不是闰年
@@ -30,7 +33,7 @@ class DateTable {
             return 30;
         }
     }
-    initTable(arr, fun) {
+    initTable(fun) {
         let htm = '' //
         let d = this.firstDay
         let day = d.getDay()//星期几
@@ -46,29 +49,23 @@ class DateTable {
             for (let x = 0; x < 7; x++) {
                 let con
                 //第一排 和最后一排处理
-                console.log(n < day)
                 if (n < day || n > monthD) {
                     con = '&nbsp;'
                 } else {
-                    if (arr && arr.indexOf(n)) {
-                        if (fun) {
-                            con = fun(n);
-                        }
+
+                    //添加
+                    if (fun) {
+                        //再处理
+                        con = fun(n);
                     } else {
-                        //添加
-                        if (this.fun) {
-                            //再处理
-                            con = this.fun(n);
-                        } else {
-                            con = n;
-                        }
+                        con = n;
                     }
+
                 }
                 n++;
 
                 tr += `<td>${con}</td>`
             }
-            console.log(tr)
             //输出
             htm += `<tr>${tr}</tr>`
         }
@@ -78,10 +75,4 @@ class DateTable {
     }
 }
 
-
-//
-function init({ obj, date, fun }) {
-    return new DateTable({ obj, date, fun }).initTable()
-}
-
-module.exports = init
+module.exports = DateTable

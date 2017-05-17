@@ -1,0 +1,84 @@
+@import "~./_common.scss";  
+
+.canvas-box{
+    position: relative;
+    width:68%;
+    margin: auto;
+    margin-top: size(40,rem);
+}
+#btn{
+    @include pos-mid();
+    right:0;
+    left: 0;
+    width: size(222,rem);
+    height: size(222,rem);
+    background-image:url(../images/zp-btn.png); 
+    background-size:100%; 
+    color: #fff;
+    text-align: center;
+    span{
+        display: inline-block;
+        width: size(56,rem);
+        padding-top: size(74,rem);
+        font-size:size(26,rem);
+
+    }
+}
+canvas{
+    background-image:url('../images/zp-bg.png');
+    background-size:100%;  
+}
+.container{
+    font-size:size(26,rem);
+    .tit{
+        margin-top:size(54,rem);
+        font-size: size(36,rem);
+    }
+        a{
+            font-size:size(20,rem);
+        }
+    .luck-data{
+        a{
+            text-decoration: underline;
+        }
+    }
+}
+//list
+.goods-list{
+    .con{
+        position: absolute;
+        left: 0;
+        right: 0;
+        top:size(88,rem);
+        margin: auto;
+        width: size(501,rem);
+        background-color:#fff;
+        border-radius: 5px; 
+        height:80%; 
+        .gl-box{
+            height:inherit; 
+            overflow: auto;
+        }
+        .tit{
+            height:size(140,rem); 
+            background-image:url("../images/mask-h.png");
+            background-size:100%;
+            background-repeat:no-repeat;
+            color: #fff;   
+            padding-top:size(26,rem); 
+            font-size: size(36,rem);
+        }
+        table{
+            width: 100%;
+            text-align: center;
+            padding:size(30,rem) size(90,rem);
+            thead{
+                font-size: size(26,rem);
+                font-weight:500; 
+            }
+            tbody{
+                font-size:size(20,rem) ;
+            }
+        }
+    }
+}
