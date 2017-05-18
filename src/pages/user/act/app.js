@@ -97,15 +97,16 @@ import Axios from 'axios'
     let signBtn = document.querySelector("#sign")
     function getSign() {
       let today = new Date().getDate()
-      
+
       if (siges.indexOf(today) != -1) {
         return tip.setTime({ title: "已签到", content: "明天再来吧!" })
       }
-      let url = "#"
+      let url = "index.php?m=Home&c=Index&a=signon"
       let data = {}
-      Axios.get(url, data).then((json) => {
+      Axios.post(url, data).then((json) => {
         let resp = json.data
-        if (resp) {
+        console.log(resp)
+        if (resp.code == '000') {
           //签到成功
           tip.setTime({ title: "成功签到", content: "获得了，10积分" })
 
@@ -117,6 +118,9 @@ import Axios from 'axios'
           //only one
           //this.removeEventListener("click", getSign, false)
 
+        } else {
+          let content = resp.msg
+          tip.setTime({ title: "签到失败", content: content })
         }
 
       })
