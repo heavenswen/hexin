@@ -29,16 +29,16 @@ function zhuanpan(o, object) {
         }
     }());
     const box = document.querySelector('.canvas-box')
-    const w = box.clientWidth
+    const w = box.clientWidth * 2
     var info = object.info;//项目
     var age = info.length;//获得个数
     var color = ["#fcdf5f", "#f76661", "#fcdf5f", "#f76661", "#fcdf5f", "#f76661", "#fcdf5f", "#f76661",];
-    var font = w/640*27+"px 微软雅黑";//项目字体
+    var font = w / 640 * 27 + "px 微软雅黑";//项目字体
     var fontColor = "#333";//项目字色
     var step = 2 * Math.PI / age;//一个弧度
     //生成画布
     let canvas = addCanvas();
-    var outerR = w / 2 * 0.75 ; //轮盘的大小
+    var outerR = w / 2 * 0.75; //轮盘的大小
     var interR = w / 2 * 0.75 * .25;//内存空白圆的大小
     var range = 10;// 转动圈数
     var radio = 0.05;//转动比 
@@ -65,6 +65,8 @@ function zhuanpan(o, object) {
         cxt.setAttributeNode(o_w)
         cxt.setAttributeNode(o_h)
         box.appendChild(cxt)
+        //cxt.style.width = w / 2 + 'px'
+        //cxt.style.height = w / 2 + 'px'
         return cxt;
     }
     this.traggerAnimate = function (n, f) {

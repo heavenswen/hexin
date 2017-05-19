@@ -10,8 +10,8 @@
     @include pos-mid();
     right:0;
     left: 0;
-    width: size(222,rem);
-    height: size(222,rem);
+    width: size(180,rem);
+    height: size(180,rem);
     background-image:url(../images/zp-btn.png); 
     background-size:100%; 
     color: #fff;
@@ -19,12 +19,13 @@
     span{
         display: inline-block;
         width: size(56,rem);
-        padding-top: size(74,rem);
+        padding-top: size(54,rem);
         font-size:size(26,rem);
 
     }
 }
 canvas{
+    width: 100%;
     background-image:url('../images/zp-bg.png');
     background-size:100%;  
 }
