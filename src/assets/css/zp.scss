@@ -54,7 +54,7 @@ canvas{
         margin: auto;
         width: size(501,rem);
         background-color:#fff;
-        border-radius: 5px; 
+        border-radius: 10px; 
         height:80%; 
         .gl-box{
             height:inherit; 
@@ -72,7 +72,7 @@ canvas{
         table{
             width: 100%;
             text-align: center;
-            padding:size(30,rem) size(90,rem);
+            padding:size(30,rem) 0;
             thead{
                 font-size: size(26,rem);
                 font-weight:500; 

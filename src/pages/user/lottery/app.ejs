@@ -22,17 +22,21 @@
         </a>
   </nav>
   <section class="page">
-    <h1 class="title ">每日抽奖</h1>
+    <h1 class="title ">
+      <!--<a class="pull-left" href="javascript:history.go(-1)">
+        返回
+      </a>-->
+      每日抽奖</h1>
     <div class="container">
       <div class="canvas-box">
         <a id="btn"><span>免费抽奖</span></a>
       </div>
       <ul class='luck-data'>
-        <li class='f-orange'><a class="pull-right" id="goods-list"> 中奖记录</a>免费抽奖：剩余 <span class='free'>1</span> 次</li>
-        <li class='f-orange'>积分抽奖：剩余 <span class='luck'>3</span> 次</li>
+        <li class='f-orange'><a class="pull-right" id="goods-list"> 中奖记录</a>免费抽奖：剩余 <span class='free'>{$free}</span> 次</li>
+        <li class='f-orange'>积分抽奖：剩余 <span class='luck'>{$jifenceshu}</span> 次</li>
       </ul>
       <h5 class="tit">
-        <a class="f-orange pull-right">当前积分：<span class='total'>0</span></a> 抽奖规则:
+        <a class="f-orange pull-right">当前积分：<span class='total'>1000</span></a> 抽奖规则:
       </h5>
       <ol class="list">
         <li>每人每日有一次免费抽奖机会。</li>

@@ -10,7 +10,7 @@ function zhuanpan(o, object) {
                 // Webkit中此取消方法的名字变了
                 window[vendors[x] + 'CancelRequestAnimationFrame'];
         }
-
+        //动画开始
         if (!window.requestAnimationFrame) {
             window.requestAnimationFrame = function (callback, element) {
                 var currTime = new Date().getTime();
@@ -22,6 +22,7 @@ function zhuanpan(o, object) {
                 return id;
             };
         }
+        //动画结束 
         if (!window.cancelAnimationFrame) {
             window.cancelAnimationFrame = function (id) {
                 clearTimeout(id);
@@ -71,6 +72,7 @@ function zhuanpan(o, object) {
     }
     this.traggerAnimate = function (n, f) {
         if (t) {
+            console.log('动画进行中')
             return false;
         }
         //默认旋转路径
@@ -86,7 +88,7 @@ function zhuanpan(o, object) {
 
         function animate() {
             //setdeg *= radio;
-            if (define_r < 0.1) {
+            if (define_r <= 0.1) {
                 //animate init
                 cancelAnimationFrame(t);
                 t = null;

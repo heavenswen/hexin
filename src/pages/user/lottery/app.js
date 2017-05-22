@@ -1,3 +1,5 @@
+//lottery 转盘
+
 import 'assets/css/react.scss'
 import 'assets/css/zp.scss'
 //rem 
@@ -14,10 +16,11 @@ import Zp from 'assets/js/zp.js'
     let btn = document.querySelector("#btn")
     //btn state
     let tragger = 1
-
     //init page
     //积分
     let luck = document.querySelector(".luck")
+    //消耗
+    const expend = 50
     //免费
     let free = document.querySelector(".free")
     //总数
@@ -36,7 +39,7 @@ import Zp from 'assets/js/zp.js'
 
     //奖项｛0:1,1:谢谢｝
     let info = ["一等奖", ' 谢谢参与', "二等奖", ' 谢谢参与', "三等奖", ' 谢谢参与']
-    let resp_info = { 1: 0, 2: 2, 3: 4, 4: 1 }
+    let resp_info = { 1: '0', 2: '2', 3: '4', 4: '1' }
     let game = new Zp(".canvas-box", {
         info: info
     })
@@ -72,7 +75,7 @@ import Zp from 'assets/js/zp.js'
 
 
         // random(info.length)
-        if (luck_num && tragger && total_n >= 50 || free_n && tragger) {
+        if (luck_num && tragger && total_n >= expend || free_n && tragger) {
 
             //btn state
             tragger = 0
@@ -91,10 +94,12 @@ import Zp from 'assets/js/zp.js'
                     free_n--;
 
                     free.innerHTML = free_n
+
+                    freeNum()
                 } else {
 
                     luck_num--;
-                    total_n -= 50;
+                    total_n -= expend;
                     luck.innerHTML = luck_num
                     total.innerHTML = total_n
                 }
@@ -106,31 +111,39 @@ import Zp from 'assets/js/zp.js'
                     tip.setTime({ title: "抽奖结果", content: "谢谢参与 再接再厉" })
 
                 } else {
-                    
+
                     tip.setTime({ title: "抽奖结果", content: s })
                 }
                 //修改次数
             }
             //get data server
             let url = 'index.php?m=Home&c=Index&a=getdata'
+            //let url = '#'
             let d = {}
             Axios.post(url, d).then(function (json) {
                 let resp = json.data
+                //let resp = { code: '000', giftid: 1 }
                 let n = resp.giftid
-                if (resp.code == '000') {
-
-                    n = resp_info[n];
-                    if (n) game.traggerAnimate(n, setZp);
+                console.log(resp)
+                if (resp.code == '000' && n) {
+                    //success
+                    n = resp_info[n]
+                    game.traggerAnimate(n, setZp);
 
                 } else {
+                    //fail
+                    //btn state init
+                    tragger = 1;
                     tip.setTime({ title: '抽奖失败', content: resp.msg })
                 }
             })
 
 
         } else if (tragger) {
+            //btn state init
+            tragger = 1;
             //次数为0
-            tip.setTime({ title: "机会已用完", content: "明天再来吧！" })
+            tip.setTime({ title: "抽奖失败", content: "今天的抽奖次数已经用完!" })
         }
     }
 
@@ -145,7 +158,7 @@ import Zp from 'assets/js/zp.js'
     let gl_con = goods.querySelector('tbody')
 
     goods_show.addEventListener("click", function () {
-        //get prize the server 
+        //get prize list the server 
         Axios.post("index.php?m=Home&c=Index&a=prizelist", {}).then(function (json) {
             let resp = json.data
 

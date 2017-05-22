@@ -96,7 +96,9 @@ video,
 .f-red {
 	color:$red;
 }
-
+.f-white{
+	color: #fff;
+}
 .f-orange {
 	color:$orange;
 }
@@ -162,8 +164,12 @@ body{
 	background: $orange;
 	text-align: center;
 	font-size: size(32,rem);
-	padding: size(20,rem)	 
+	padding: size(20,rem) 15px;
+	a.pull-left{
+		margin-right: size(-100,rem);
+	}	 
 }
+//bottom nav
 .nav{
 	position: fixed;
 	left: 0;
@@ -197,6 +203,7 @@ body{
 .nav~.page{
 	padding-bottom: 49px;
 }
+//icon
 i[data-icon]{
 	display: inline-block;
 	width:size(46,rem);
@@ -213,6 +220,7 @@ i[data-icon]{
 }
 
 .mask{
+	//tip
 	position: fixed;
 	left:0;
 	top:0;

@@ -1,3 +1,4 @@
+//签到
 import 'assets/css/react.scss'
 import 'assets/css/index.scss'
 //rem 
@@ -16,10 +17,15 @@ import Axios from 'axios'
   });
 
   //已签到的日期
-  Axios.get('#', {}, {}).then(function (json) {
+  Axios.post('index.php?m=Home&c=Index&a=qiandaolist', {}).then(function (json) {
     //获得已签到的日期
+    let resp = json.data
+    let arr = []
 
-    let arr = json.data.siges
+    for (let i = 0; i < resp.length; i++) {
+      let v = resp[i].riqi
+      arr.push(v)
+    }
 
     initTable(arr)
 
@@ -28,10 +34,11 @@ import Axios from 'axios'
   //init datetable
   function initTable(arr) {
     //已签到的日期
-    let siges = arr || []
+    let siges = arr
 
     //init table
     signTable.initTable(function (n) {
+      n = String(n)
       if (siges.indexOf(n) != -1) {
         return `<a data-date='${n}'><i data-icon='cart'></i></a>`
       } else {
@@ -75,7 +82,6 @@ import Axios from 'axios'
           //show
           this.dataset.sp = 'open'
           //只执行一次
-          console.log(this)
           this.removeEventListener('click', getGoods, false)
           //tip
           tip.setTime({
@@ -96,6 +102,7 @@ import Axios from 'axios'
     //签到
     let signBtn = document.querySelector("#sign")
     function getSign() {
+      //获得当前日期
       let today = new Date().getDate()
 
       if (siges.indexOf(today) != -1) {
@@ -105,7 +112,6 @@ import Axios from 'axios'
       let data = {}
       Axios.post(url, data).then((json) => {
         let resp = json.data
-        console.log(resp)
         if (resp.code == '000') {
           //签到成功
           tip.setTime({ title: "成功签到", content: "获得了，10积分" })
