@@ -18,8 +18,8 @@ import Axios from 'axios'
   //积分 
   let int = 10
   let date = document.querySelector(".date")
-
-  date.innerHTML = `${signTable.year}年${Number(signTable.mouth)+1}月`
+  let day = document.querySelector(".day")
+  date.innerHTML = `${signTable.year}年${Number(signTable.mouth) + 1}月`
   //已签到的日期
   Axios.post('index.php?m=Home&c=Index&a=qiandaolist', {}).then(function (json) {
     //获得已签到的日期
@@ -55,7 +55,8 @@ import Axios from 'axios'
   function initTable(arr) {
     //已签到的日期
     let siges = arr
-
+    //累计签到天数 
+    day.innerHTML = arr.length
     //init table
     signTable.initTable(function (n) {
       n = String(n)
@@ -94,15 +95,17 @@ import Axios from 'axios'
     function getGoods() {
       let day = this.parentNode.dataset.day
       if (day > sigeLength) return;
-      let url = "#"
+      let url = "index.php?m=Home&c=Index&a=signontotal"
       let data = {}
       Axios.get(url, data).then((json) => {
         let resp = json.data
-        if (resp) {
-          //show
+        if (resp.code == '000') {
+          //show 添加积分
           this.dataset.sp = 'open'
           //只执行一次
           this.removeEventListener('click', getGoods, false)
+          //积分 show
+          total.innerHTML = Number(total.innerHTML) + resp.count
           //tip
           tip.setTime({
             title: "签到礼包", content: `
@@ -110,9 +113,15 @@ import Axios from 'axios'
               您已成功签到 ${sigeLength} 天
             </p>
             <p>
-              恭喜你，获得签到礼包
+              ${resp.msg}
             <p>
             `})
+
+        } else if (resp.code == '001') {
+          //提示
+          tip.setTime({ title: '签到礼包', content: resp.msg })
+        } else {
+          console.log(resp)
         }
 
       })
@@ -136,10 +145,10 @@ import Axios from 'axios'
           //签到成功
           tip.setTime({ title: "成功签到", content: `获得了，${int}积分` })
           //修改积分
-          let num = total.innerHTML
-          num = Number(num) + int
-          total.innerHTML = num
-
+          total.innerHTML = Number(total.innerHTML) + int
+          //修改天数
+          day.innerHTML = Number(day.innerHTML) + 1
+          //显示签到
           let o = document.querySelector(`[data-date='${today}'`)
           o.innerHTML = `<i data-icon='cart'></i>`
           siges.push(today)
@@ -149,8 +158,7 @@ import Axios from 'axios'
           //this.removeEventListener("click", getSign, false)
 
         } else {
-          let content = resp.msg
-          tip.setTime({ title: "签到失败", content: content })
+          tip.setTime({ title: "签到失败", content: resp.msg })
         }
 
       })
