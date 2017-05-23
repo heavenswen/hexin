@@ -166,7 +166,7 @@ import Zp from 'assets/js/zp.js'
                 let htm = ''
                 for (let i = 0; i < resp.length; i++) {
                     let d = resp[i]
-                    let tr = `<td>${d.dateline}</td><td></td><td>${info[resp_info[d.prize]]}</td>`
+                    let tr = `<td>${d.dateline}</td><td>${d.score}</td><td>${info[resp_info[d.prize]]}</td>`
 
                     htm += `<tr>${tr}</tr>`
                 }

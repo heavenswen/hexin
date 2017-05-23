@@ -15,7 +15,11 @@ import Axios from 'axios'
   let signTable = new DateTable({
     obj: '.table tbody'
   });
+  //积分 
+  let int = 10
+  let date = document.querySelector(".date")
 
+  date.innerHTML = `${signTable.year}年${Number(signTable.mouth)+1}月`
   //已签到的日期
   Axios.post('index.php?m=Home&c=Index&a=qiandaolist', {}).then(function (json) {
     //获得已签到的日期
@@ -30,6 +34,22 @@ import Axios from 'axios'
     initTable(arr)
 
   })
+
+  let total = document.querySelector(".integral")
+  //get server 积分
+  function getInt() {
+    Axios.post("index.php?m=Home&c=Index&a=getscore", {}).then(function (json) {
+      let resp = json.data
+      if (resp.score) {
+        total.innerHTML = resp.score
+      } else {
+        console.error(`score empty`)
+      }
+    })
+  }
+  getInt();
+
+
 
   //init datetable
   function initTable(arr) {
@@ -114,7 +134,11 @@ import Axios from 'axios'
         let resp = json.data
         if (resp.code == '000') {
           //签到成功
-          tip.setTime({ title: "成功签到", content: "获得了，10积分" })
+          tip.setTime({ title: "成功签到", content: `获得了，${int}积分` })
+          //修改积分
+          let num = total.innerHTML
+          num = Number(num) + int
+          total.innerHTML = num
 
           let o = document.querySelector(`[data-date='${today}'`)
           o.innerHTML = `<i data-icon='cart'></i>`
