@@ -43,7 +43,7 @@ class init {
         //计时器
         let that = this
 
-        time = time ? time : 3000
+        time = time ? time : 8000
         if (this.t) clearTimeout(that.t)
         this.show({ title, content })
         this.t = setTimeout(that.hide, time)

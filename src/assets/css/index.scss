@@ -126,6 +126,7 @@ $table_r:5px;//table 圆角
     }
 }
 .goods{
+    overflow: hidden;
     position: relative;
     margin-top: size(30,rem);
     >.sp, &::before{
@@ -137,6 +138,7 @@ $table_r:5px;//table 圆角
         
     }
     >.sp{
+        margin-left:size(46,rem); 
         width: 0;
         background-color: $orange;
         transition: all .3s linear;
@@ -156,7 +158,7 @@ $table_r:5px;//table 圆角
         z-index: 1;
         background-color: #fff;
         margin-right:8.33%; 
-        font-size:size(12,rem); 
+        font-size:size(20,rem); 
         span,i{
             text-align: center;
             display:block;
@@ -175,7 +177,7 @@ $table_r:5px;//table 圆角
             }
         }
          &:not(:nth-of-type(1))[data-sp='open']{
-           i{
+           i[data-icon]{
               background-image:url(../images/box-open.png); 
             }
          }

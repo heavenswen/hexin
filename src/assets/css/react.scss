@@ -227,7 +227,6 @@ i[data-icon]{
 	width: 100%;
 	height: 100%;
 	opacity: 0;
-	transform: scale(.5);
 	background-color:rgba(0, 0, 0,.6) ;
 	z-index: 99;
 	transition: all .3s linear;
@@ -235,13 +234,20 @@ i[data-icon]{
 	&[data-show='true']{
 		pointer-events: auto;
 		opacity: 1;
-		transform: scale(1);
+		.mask-main{
+			opacity: 1;
+			transform: translateY(-50%);
+		}
 	}
 	.mask-main{
 		@include pos-mid();
 		left: 0;
 		right: 0;
 		width: size(517,rem);
+		transition: all .3s linear;
+		transition-delay: .3s;
+		opacity: 0;
+		transform: translateY(-100%)
 
 	}
 	.mask-t{

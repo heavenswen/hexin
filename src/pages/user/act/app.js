@@ -9,33 +9,62 @@ import Axios from 'axios'
 (function () {
   //rem init
   new Rem();
+  //获得今天的日期
+  const today = new Date().getDate()
+  const openNums = {} //签到进行状态
   //init tip
-  let tip = new Tip({})
+  const tip = new Tip({})
   //date 
-  let signTable = new DateTable({
+  const signTable = new DateTable({
     obj: '.table tbody'
   });
+
   //积分 
-  let int = 10
-  let date = document.querySelector(".date")
-  let day = document.querySelector(".day")
+  const int = 10
+  //日期显示
+  const date = document.querySelector(".date")
+  //；累计签到的天数
+  const day = document.querySelector(".day")
+  //签到进度
+  const sp = document.querySelector(".sp")
+  //签到按钮
+  const signBtn = document.querySelector("#sign")
+  //sp
+  const opens = document.querySelectorAll(`[data-day]`)
+  //累计积分
+  const total = document.querySelector(".integral")
+  //获得取得5,10
+  const opneNums = []
+  for (let i = 0; i < opens.length; i++) {
+    let v = opens[i].dataset.day
+    opneNums.push(v)
+  }
+
   date.innerHTML = `${signTable.year}年${Number(signTable.mouth) + 1}月`
   //已签到的日期
   Axios.post('index.php?m=Home&c=Index&a=qiandaolist', {}).then(function (json) {
     //获得已签到的日期
     let resp = json.data
     let arr = []
-
     for (let i = 0; i < resp.length; i++) {
       let v = resp[i].riqi
+
       arr.push(v)
+      //设置天道状态
+      if (v == today) signBtn.innerHTML = '已签到'
+      //已领取状态
+      if (resp[i].addscore != '0' && opneNums.indexOf(String(i + 1)) != -1) {
+        //已领取
+        let obj = document.querySelector(`[data-day='${i + 1}']`)
+        if (obj) obj.dataset.sp = 'open'
+      }
     }
 
     initTable(arr)
 
   })
 
-  let total = document.querySelector(".integral")
+
   //get server 积分
   function getInt() {
     Axios.post("index.php?m=Home&c=Index&a=getscore", {}).then(function (json) {
@@ -54,7 +83,7 @@ import Axios from 'axios'
   //init datetable
   function initTable(arr) {
     //已签到的日期
-    let siges = arr
+    const siges = arr
     //累计签到天数 
     day.innerHTML = arr.length
     //init table
@@ -71,8 +100,7 @@ import Axios from 'axios'
     //sige day 
     let sigeLength = siges.length
 
-    //签到进度
-    let sp = document.querySelector(".sp")
+
     function setSp() {
       let n = sigeLength / sigeNum * 100
 
@@ -83,9 +111,10 @@ import Axios from 'axios'
         let o = sigeObjs[i]
         let n = o.dataset.day
         if (Number(n) <= sigeLength) {
-          o.dataset.sp = 'active'
-          o.querySelector('a').addEventListener('click', getGoods, false)
+          if (o.dataset.sp != 'open') o.dataset.sp = 'active'
         }
+        if (o.dataset.sp != 'open') o.querySelector('a').addEventListener('click', getGoods, false)
+
       }
 
     }
@@ -93,19 +122,24 @@ import Axios from 'axios'
 
     //get goods
     function getGoods() {
-      let day = this.parentNode.dataset.day
-      if (day > sigeLength) return;
+      let d = this.parentNode.dataset.day
+      if (d > sigeLength) return;
       let url = "index.php?m=Home&c=Index&a=signontotal"
-      let data = {}
-      Axios.get(url, data).then((json) => {
+      var params = new URLSearchParams();
+      //params.append('riqi', riqi);
+      params.append('day', d)
+      //let data = { riqi: riqi, day: day }
+
+
+      Axios.post(url, params).then((json) => {
         let resp = json.data
         if (resp.code == '000') {
           //show 添加积分
-          this.dataset.sp = 'open'
+          this.parentNode.dataset.sp = 'open'
           //只执行一次
           this.removeEventListener('click', getGoods, false)
           //积分 show
-          total.innerHTML = Number(total.innerHTML) + resp.count
+          total.innerHTML = Number(total.innerHTML) + Number(resp.total)
           //tip
           tip.setTime({
             title: "签到礼包", content: `
@@ -129,13 +163,12 @@ import Axios from 'axios'
 
 
     //签到
-    let signBtn = document.querySelector("#sign")
+
     function getSign() {
       //获得当前日期
-      let today = new Date().getDate()
 
-      if (siges.indexOf(today) != -1) {
-        return tip.setTime({ title: "已签到", content: "明天再来吧!" })
+      if (siges.indexOf(today) != -1 && signBtn.innerHTML == "已签到") {
+        return;
       }
       let url = "index.php?m=Home&c=Index&a=signon"
       let data = {}
@@ -149,21 +182,25 @@ import Axios from 'axios'
           //修改天数
           day.innerHTML = Number(day.innerHTML) + 1
           //显示签到
-          let o = document.querySelector(`[data-date='${today}'`)
+          let o = document.querySelector(`[data-date='${today}']`)
           o.innerHTML = `<i data-icon='cart'></i>`
           siges.push(today)
           sigeLength++;
+          signBtn.innerHTML == "已签到"
           setSp();//set sp status
           //only one
           //this.removeEventListener("click", getSign, false)
 
         } else {
+
           tip.setTime({ title: "签到失败", content: resp.msg })
+
         }
+
 
       })
     }
 
-    document.querySelector("#sign").addEventListener("click", getSign, false)
+    signBtn.addEventListener("click", getSign, false)
   }
 })()
