@@ -100,7 +100,7 @@ import Axios from 'axios'
     //sige day 
     let sigeLength = siges.length
 
-
+    //进度
     function setSp() {
       let n = sigeLength / sigeNum * 100
 
@@ -113,6 +113,7 @@ import Axios from 'axios'
         if (Number(n) <= sigeLength) {
           if (o.dataset.sp != 'open') o.dataset.sp = 'active'
         }
+        //获得礼品事件
         if (o.dataset.sp != 'open') o.querySelector('a').addEventListener('click', getGoods, false)
 
       }
@@ -165,9 +166,9 @@ import Axios from 'axios'
     //签到
 
     function getSign() {
-      //获得当前日期
-
-      if (siges.indexOf(today) != -1 && signBtn.innerHTML == "已签到") {
+      
+      //不允许重复签到
+      if (siges.indexOf(today) != -1 || signBtn.innerHTML == "已签到") {
         return;
       }
       let url = "index.php?m=Home&c=Index&a=signon"
