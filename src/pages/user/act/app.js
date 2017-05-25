@@ -51,7 +51,7 @@ import Axios from 'axios'
 
       arr.push(v)
       //设置天道状态
-      if (v == today) signBtn.innerHTML = '已签到'
+
       //已领取状态
       if (resp[i].addscore != '0' && opneNums.indexOf(String(i + 1)) != -1) {
         //已领取
@@ -59,7 +59,7 @@ import Axios from 'axios'
         if (obj) obj.dataset.sp = 'open'
       }
     }
-
+    if (arr.indexOf(today)) signBtn.innerHTML = '已签到'
     initTable(arr)
 
   })
@@ -166,9 +166,9 @@ import Axios from 'axios'
     //签到
 
     function getSign() {
-      
+
+      if (signBtn.innerHTML == "已签到") {
       //不允许重复签到
-      if (siges.indexOf(today) != -1 || signBtn.innerHTML == "已签到") {
         return;
       }
       let url = "index.php?m=Home&c=Index&a=signon"
@@ -187,7 +187,7 @@ import Axios from 'axios'
           o.innerHTML = `<i data-icon='cart'></i>`
           siges.push(today)
           sigeLength++;
-          signBtn.innerHTML == "已签到"
+          signBtn.innerHTML = "已签到"
           setSp();//set sp status
           //only one
           //this.removeEventListener("click", getSign, false)
