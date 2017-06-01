@@ -47,7 +47,7 @@ import Axios from 'axios'
     let resp = json.data
     let arr = []
     for (let i = 0; i < resp.length; i++) {
-      let v = resp[i].riqi
+      let v = Number(resp[i].riqi)
 
       arr.push(v)
       //设置天道状态
@@ -59,7 +59,7 @@ import Axios from 'axios'
         if (obj) obj.dataset.sp = 'open'
       }
     }
-    if (arr.indexOf(today)) signBtn.innerHTML = '已签到'
+    if (arr.indexOf(today) != -1) signBtn.innerHTML = '已签到'
     initTable(arr)
 
   })
@@ -88,7 +88,7 @@ import Axios from 'axios'
     day.innerHTML = arr.length
     //init table
     signTable.initTable(function (n) {
-      n = String(n)
+      n = Number(n)
       if (siges.indexOf(n) != -1) {
         return `<a data-date='${n}'><i data-icon='cart'></i></a>`
       } else {
@@ -168,7 +168,7 @@ import Axios from 'axios'
     function getSign() {
 
       if (signBtn.innerHTML == "已签到") {
-      //不允许重复签到
+        //不允许重复签到
         return;
       }
       let url = "index.php?m=Home&c=Index&a=signon"

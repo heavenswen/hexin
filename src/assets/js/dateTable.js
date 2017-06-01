@@ -13,7 +13,7 @@ class DateTable {
     mouthLength(d) {
         // date
         //计算出天数
-        let day = d?d:this.firstDay
+        let day = d ? d : this.firstDay
 
         let year = day.getYear()
         let n = day.getMonth()
@@ -26,7 +26,7 @@ class DateTable {
             } else {
                 return 29;
             }
-        } else if (big.indexOf(n)) {
+        } else if (big.indexOf(n) != -1) {
             //大月
             return 31;
         } else {
@@ -37,28 +37,30 @@ class DateTable {
         let htm = '' //
         let d = this.firstDay
         let day = d.getDay()//星期几
-        let addD = (7 - day) //补齐天数
+        let addD = 7 - (7 - day) //补齐天数
         let monthD = this.mouthLength(d) //月份的天数
         let num = monthD + addD//获得天数
         let addM = num % 7 ? 1 : 0;
         let m = parseInt(num / 7) + addM //几周
-        let n = 0//从1开始
+        let n = 0//格子数
+        let s = 0//实际日期
         for (let i = 1; i < m; i++) {
             let tr = ''
             //td 输出
             for (let x = 0; x < 7; x++) {
                 let con
-                //第一排 和最后一排处理
-                if (n < day || n > monthD) {
+                //第一排 和最后一排处理 
+                if (n < day || n >= (monthD + day)) {
                     con = '&nbsp;'
                 } else {
-
-                    //添加
+                    //实际日期递增
+                    s++
+                    //添加    
                     if (fun) {
                         //再处理
-                        con = fun(n);
+                        con = fun(s);
                     } else {
-                        con = n;
+                        con = s;
                     }
 
                 }
